@@ -4,21 +4,29 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-  
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.google.code.laplatafarmacias.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/laplatafarmacias/greet</url-pattern>
-  </servlet-mapping>
-  
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>Laplatafarmacias.html</welcome-file>
-  </welcome-file-list>
+
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>greetServlet</servlet-name>
+		<servlet-class>com.google.code.laplatafarmacias.server.GreetingServiceImpl</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>GetPharmaciesOnDuty</servlet-name>
+		<servlet-class>com.google.code.laplatafarmacias.server.servlet.GetPharmaciesOnDuty</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>greetServlet</servlet-name>
+		<url-pattern>/laplatafarmacias/greet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetPharmaciesOnDuty</servlet-name>
+		<url-pattern>/laplatafarmacias/getPharmaciesOnDuty</url-pattern>
+	</servlet-mapping>
+
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>Laplatafarmacias.html</welcome-file>
+	</welcome-file-list>
 
 </web-app>
