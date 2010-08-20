@@ -87,19 +87,20 @@
           // obtain the attribues of each item
 		  //alert('i: '+i);
 		  //describimelo("items["+i+"]", items[i]);
-		  var latText = items[i].getElementsByTagName("geo:lat")[0].textContent;		  	  
+		  var elements = items[i].childNodes;
+		  for (var j = 0;j < elements.length; j++ ) {
+			  if (elements.item(j).nodeName == "geo:lat") {
+				  var latText = elements.item(j).textContent == null ? elements.item(j).text : elements.item(j).textContent;
+			  } else if (elements.item(j).nodeName == "geo:long") {
+				  var lngText = elements.item(j).textContent == null ? elements.item(j).text : elements.item(j).textContent;
+			  } else if (elements.item(j).nodeName == "title") {
+				  var title = elements.item(j).textContent == null ? elements.item(j).text : elements.item(j).textContent;
+			  } 
+		  }
           var lat = parseFloat(latText);
-		  //alert('lat: '+lat);
-		  var lngText = items[i].getElementsByTagName("geo:long")[0].textContent;
           var lng = parseFloat(lngText);
-		  //alert('long: '+lng);
           var point = new GLatLng(lat,lng);
-          var html = "http://maps.google.com/";
-          //var label = items[i].getAttribute("label");
-		  var title = items[i].getElementsByTagName("title")[0].textContent;
-		  //alert('title: '+title);
-		  //var html = items[i].getElementsByTagName("title")[0].textContent;
-          // create the item
+          var html = "Content coming soon";
           var item = createMarker(point,title,html);
           map.addOverlay(item);
         }
