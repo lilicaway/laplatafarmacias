@@ -45,7 +45,7 @@
 	
        if (GBrowserIsCompatible()) {
       // this variable will collect the html which will eventualkly be placed in the side_bar
-      var side_bar_html = "";
+      var side_bar_html = "<ul>";
     
       // arrays to hold copies of the markers used by the side_bar
       // because the function closure trick doesnt work there
@@ -60,7 +60,7 @@
         // save the info we need to use later for the side_bar
         gmarkers.push(marker);
         // add a line to the side_bar html
-        side_bar_html += '<a href="javascript:myclick(' + (gmarkers.length-1) + ')">' + name + '<\/a><br>';
+        side_bar_html += '<li><a href="javascript:myclick(' + (gmarkers.length-1) + ')">' + name + '<\/a></li>';
         return marker;
       }
 
@@ -75,7 +75,7 @@
       var map = new GMap2(document.getElementById("map"));
       map.addControl(new GLargeMapControl());
       map.addControl(new GMapTypeControl());
-      map.setCenter(new GLatLng( -34.9157 , -57.9486 ), 13);
+      map.setCenter(new GLatLng( -34.9095 , -57.9993 ), 12);
 
 
       // Read the data from example.xml
@@ -95,15 +95,18 @@
 				  var lngText = elements.item(j).textContent == null ? elements.item(j).text : elements.item(j).textContent;
 			  } else if (elements.item(j).nodeName == "title") {
 				  var title = elements.item(j).textContent == null ? elements.item(j).text : elements.item(j).textContent;
-			  } 
+			  } else if (elements.item(j).nodeName == "description") {
+				  var description = elements.item(j).textContent == null ? elements.item(j).text : elements.item(j).textContent;
+			  }
 		  }
           var lat = parseFloat(latText);
           var lng = parseFloat(lngText);
           var point = new GLatLng(lat,lng);
-          var html = "Content coming soon";
+          var html = "<strong>"+title+"</strong>" + (description ? description : "");
           var item = createMarker(point,title,html);
           map.addOverlay(item);
         }
+        side_bar_html += "</ul>";
         // put the assembled side_bar_html contents into the side_bar div
         document.getElementById("side_bar").innerHTML = side_bar_html;
       });
