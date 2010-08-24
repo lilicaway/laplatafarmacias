@@ -31,12 +31,13 @@ public class GetPharmaciesOnDuty extends HttpServlet {
 	// http://code.google.com/appengine/docs/java/urlfetch/overview.html
 
 	URL url = new URL(PHARMACIES_ON_DUTY_LOCATION);
-	BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+	String charsetName = "utf-8";
+	BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), charsetName));
 	String line;
 
-	resp.setContentType("text/xml");
+	resp.setContentType("text/xml; charset=" + charsetName);
 
-	PrintStream out = new PrintStream(resp.getOutputStream());
+	PrintStream out = new PrintStream(resp.getOutputStream(), false, charsetName);
 
 	while ((line = reader.readLine()) != null) {
 	    out.println(line);
