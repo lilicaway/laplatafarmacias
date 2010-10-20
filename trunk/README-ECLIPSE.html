@@ -7,6 +7,7 @@
 
 <h1>Use this project from Eclipse</h1>
 
+<h2>Execution from Eclipse</h2>
 <p>If you want to use this project from Eclipse follow the instructions from <a href="http://googlewebtoolkit.blogspot.com/2010/08/how-to-use-google-plugin-for-eclipse.html">GWT's blog</a>.</p>
 
 <p>
@@ -23,5 +24,35 @@ The relevant part is copied here:
 <li>Also under Java Build Path, select the Source tab and ensure that the Build output directory is enabled and pointing to target/your-project-name/WEB-INF/classes. If you created the project with mvn eclipse:eclipse, this should be done for you automatically.</li>
 <li>Finally, and this is very important, the first time you launch your project using Run As | Web Application (or Debug), you will be prompted to select the war directly. This is NOT src/main/webapp, but rather the WAR output folder, which is target/your-project-name. If you make a mistake, simply go to Run | Run Configurations... and remove any old configurations for the project. GPE will then ask you again next time you try to Run As | Web Application.</li>
 </ol>
+
+<h2>Execution from Maven</h2>
+
+<p>The documentation for each plugin lists all of the Maven goals
+available, but we'll briefly look at the most common:</p>
+<ul>
+ <li><span style="font-weight: bold;">mvn gae:run</span> starts the
+ App Engine development server.</li>
+ <li><span style="font-weight: bold;">mvn gae:deploy</span> deploys
+ your application to App Engine.</li>
+ <li><span style="font-weight: bold;">mvn gwt:run</span> runs your
+ GWT app in hosted mode using the standalone dev mode console. If you're
+ using maven-gae-plugin, it will also invoke gae:run.</li>
+
+ <li><span style="font-weight: bold;">mvn gwt:debug</span> runs
+ your GWT app in hosted mode and additionally enables the debugger port
+ hook so you can debug in Eclipse as a Remote Java Application on the
+ standard debugger port (8000). It is generally easier, however, to
+ launch the debugger within Eclipse using GPE. We'll look at how to
+ enable that shortly.</li>
+ <li><span style="font-weight: bold;">mvn gwt:compile</span>
+ compiles your GWT app for production.</li>
+ <li><span style="font-weight: bold;">mvn eclipse:eclipse</span>
+ creates an Eclipse project that you can import into Eclipse. The sample
+ POM referenced above contains configuration for the
+ maven-eclipse-plugin which adds the gwt and gae project natures used by
+ Google Plugin for Eclipse. After you run Maven eclipse:eclipse, you can
+ import your project into Eclipse using File | Import | Project |
+ Existing Project.</li>
+
 
 </body>

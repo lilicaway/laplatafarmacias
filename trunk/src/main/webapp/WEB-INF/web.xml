@@ -1,32 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE web-app
-    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-    "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-<web-app>
+    <!-- Filters -->
+    <filter>
+        <filter-name>HitCounter</filter-name>
+        <filter-class>com.google.code.unlp.tesis.volatiler.HitCounterFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HitCounter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-	<!-- Servlets -->
-	<servlet>
-		<servlet-name>greetServlet</servlet-name>
-		<servlet-class>com.google.code.laplatafarmacias.server.GreetingServiceImpl</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>GetPharmaciesOnDuty</servlet-name>
-		<servlet-class>com.google.code.laplatafarmacias.server.servlet.GetPharmaciesOnDuty</servlet-class>
-	</servlet>
+    <filter>
+        <filter-name>AddSomethingAtTheBottom</filter-name>
+        <filter-class>com.google.code.unlp.tesis.volatiler.AddSomethingAtTheBottomFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AddSomethingAtTheBottom</filter-name>
+        <url-pattern>/googleMaps.jsp</url-pattern>
+    </filter-mapping>
 
-	<servlet-mapping>
-		<servlet-name>greetServlet</servlet-name>
-		<url-pattern>/laplatafarmacias/greet</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>GetPharmaciesOnDuty</servlet-name>
-		<url-pattern>/laplatafarmacias/getPharmaciesOnDuty</url-pattern>
-	</servlet-mapping>
+    <filter>
+        <filter-name>Xslt</filter-name>
+        <filter-class>com.google.code.unlp.tesis.volatiler.XsltFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Xslt</filter-name>
+        <url-pattern>/googleMaps.jsp</url-pattern>
+    </filter-mapping>
+    <!-- 
+    <filter-mapping>
+        <filter-name>Xslt</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
+     -->
 
-	<!-- Default page to serve -->
-	<welcome-file-list>
-		<welcome-file>googleMaps.html</welcome-file>
-	</welcome-file-list>
+    <!-- Servlets -->
+    <servlet>
+        <servlet-name>greetServlet</servlet-name>
+        <servlet-class>com.google.code.laplatafarmacias.server.GreetingServiceImpl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetPharmaciesOnDuty</servlet-name>
+        <servlet-class>com.google.code.laplatafarmacias.server.servlet.GetPharmaciesOnDuty</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>greetServlet</servlet-name>
+        <url-pattern>/laplatafarmacias/greet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetPharmaciesOnDuty</servlet-name>
+        <url-pattern>/laplatafarmacias/getPharmaciesOnDuty</url-pattern>
+    </servlet-mapping>
+
+    <!-- Default page to serve -->
+    <welcome-file-list>
+        <welcome-file>googleMaps.jsp</welcome-file>
+    </welcome-file-list>
 
 </web-app>
