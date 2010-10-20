@@ -2,11 +2,11 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.google.code.laplatafarmacias</groupId>
-    <artifactId>laplatafarmacias</artifactId>
+    <artifactId>laplatafarmacias-webapp</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>laplatafarmacias</name>
-    <description>laplatafarmacias</description>
+    <name>laplatafarmacias-webapp</name>
+    <description>laplatafarmacias-webapp</description>
 
     <properties>
         <gwt.version>2.0.4</gwt.version>
