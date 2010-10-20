@@ -25,6 +25,10 @@
     <filter>
         <filter-name>Xslt</filter-name>
         <filter-class>com.google.code.unlp.tesis.volatiler.XsltFilter</filter-class>
+        <init-param>
+            <param-name>xslPath</param-name>
+            <param-value>/xml/html.xsl</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>Xslt</filter-name>
