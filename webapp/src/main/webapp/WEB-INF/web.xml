@@ -3,7 +3,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-    <!-- Filters -->
+    <!-- Start of Volatile Configuration -->
+    <listener>
+        <listener-class>com.google.code.unlp.tesis.volatiler.servlet.VolatilerRegistryListener</listener-class>
+    </listener>
+
     <filter>
         <filter-name>HitCounter</filter-name>
         <filter-class>com.google.code.unlp.tesis.volatiler.HitCounterFilter</filter-class>
@@ -15,23 +19,30 @@
 
     <filter>
         <filter-name>AddSomethingAtTheBottom</filter-name>
-        <filter-class>com.google.code.unlp.tesis.volatiler.AddSomethingAtTheBottomFilter</filter-class>
+        <filter-class>com.google.code.unlp.tesis.volatiler.filter.AddSomethingAtTheBottomFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AddSomethingAtTheBottom</filter-name>
         <url-pattern>/googleMaps.jsp</url-pattern>
     </filter-mapping>
 
+
     <filter>
-        <filter-name>Xslt</filter-name>
-        <filter-class>com.google.code.unlp.tesis.volatiler.XsltFilter</filter-class>
+        <filter-name>FarmaciasMapEnhancer</filter-name>
+        <filter-class>com.google.code.unlp.tesis.volatiler.filter.XsltFilter</filter-class>
         <init-param>
             <param-name>xslPath</param-name>
             <param-value>/xml/html.xsl</param-value>
         </init-param>
+        <!-- 
+        <init-param>
+            <param-name>affinityResolver</param-name>
+            <param-value>com.google.code.laplatafarmacias.valentine.AffinityResolver</param-value>
+        </init-param>
+         -->
     </filter>
     <filter-mapping>
-        <filter-name>Xslt</filter-name>
+        <filter-name>FarmaciasMapEnhancer</filter-name>
         <url-pattern>/googleMaps.jsp</url-pattern>
     </filter-mapping>
     <!-- 
@@ -40,6 +51,15 @@
         <url-pattern>/</url-pattern>
     </filter-mapping>
      -->
+     <servlet>
+        <servlet-name>VolatilityActivatorConsole</servlet-name>
+        <servlet-class>com.google.code.unlp.tesis.volatiler.servlet.VolatilityActivatorConsoleServlet</servlet-class>
+     </servlet>
+     <servlet-mapping>
+        <servlet-name>VolatilityActivatorConsole</servlet-name>
+        <url-pattern>/admin/volatilityActivatorConsole</url-pattern>
+     </servlet-mapping>
+    <!-- End of Volatile Configuration -->
 
     <!-- Servlets -->
     <servlet>
