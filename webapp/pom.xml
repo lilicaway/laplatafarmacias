@@ -17,11 +17,13 @@
         <dependency>
             <groupId>com.google.code.unlp.tesis.volatiler</groupId>
             <artifactId>volatiler</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${groupId}</groupId>
             <artifactId>volatileProject</artifactId>
             <version>${version}</version>
+            <scope>runtime</scope>
         </dependency>
         <!-- End of Project specific dependencies -->
     
