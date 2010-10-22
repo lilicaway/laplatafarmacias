@@ -34,12 +34,10 @@
             <param-name>xslPath</param-name>
             <param-value>/xml/html.xsl</param-value>
         </init-param>
-        <!-- 
         <init-param>
             <param-name>affinityResolver</param-name>
-            <param-value>com.google.code.laplatafarmacias.valentine.AffinityResolver</param-value>
+            <param-value>com.google.code.laplatafarmacias.volatileProject.affinity.EvenMinutesAffinityResolver</param-value>
         </init-param>
-         -->
     </filter>
     <filter-mapping>
         <filter-name>FarmaciasMapEnhancer</filter-name>
