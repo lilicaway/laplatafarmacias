@@ -68,6 +68,10 @@
         <servlet-name>GetPharmaciesOnDuty</servlet-name>
         <servlet-class>com.google.code.laplatafarmacias.server.servlet.GetPharmaciesOnDuty</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>XmlGateway</servlet-name>
+        <servlet-class>com.google.code.laplatafarmacias.server.servlet.XmlGateway</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>greetServlet</servlet-name>
@@ -76,6 +80,10 @@
     <servlet-mapping>
         <servlet-name>GetPharmaciesOnDuty</servlet-name>
         <url-pattern>/laplatafarmacias/getPharmaciesOnDuty</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>XmlGateway</servlet-name>
+        <url-pattern>/xmlGateway</url-pattern>
     </servlet-mapping>
 
     <!-- Default page to serve -->
