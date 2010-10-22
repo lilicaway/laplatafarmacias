@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class XmlGateway extends HttpServlet {
+public class XmlGatewayServlet extends HttpServlet {
     public static final String URL_REQUEST_ATTRIBUTE = "URL_REQUEST_ATTRIBUTE";
 
     @Override

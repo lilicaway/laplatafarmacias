@@ -26,7 +26,7 @@ public class GetPharmaciesOnDuty extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-	request.setAttribute(XmlGateway.URL_REQUEST_ATTRIBUTE, PHARMACIES_ON_DUTY_LOCATION);
+	request.setAttribute(XmlGatewayServlet.URL_REQUEST_ATTRIBUTE, PHARMACIES_ON_DUTY_LOCATION);
 	RequestDispatcher requestDispatcher = request.getRequestDispatcher("/xmlGateway");
 	requestDispatcher.forward(request, response);
     }

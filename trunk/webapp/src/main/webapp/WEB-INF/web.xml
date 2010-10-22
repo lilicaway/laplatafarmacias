@@ -70,7 +70,7 @@
     </servlet>
     <servlet>
         <servlet-name>XmlGateway</servlet-name>
-        <servlet-class>com.google.code.laplatafarmacias.server.servlet.XmlGateway</servlet-class>
+        <servlet-class>com.google.code.laplatafarmacias.server.servlet.XmlGatewayServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
