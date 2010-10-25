@@ -71,24 +71,43 @@
             <param-name>xslPath</param-name>
             <param-value>/xml/addALinkToTerremotos.xsl</param-value>
         </init-param>
+        <init-param>
+            <param-name>affinityResolver</param-name>
+            <param-value>com.google.code.laplatafarmacias.volatileEarthquake.affinity.GetFarmaciasOnDutyForFarmaciasOgnlAffinityResolver</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>AddALinkToTerremotos</filter-name>
         <url-pattern>/googleMaps.jsp</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>AddALinkToTerremotos</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
      
-     <!-- Defines an alias called /terremotos.jsp for the /googleMaps.jsp -->
-    <servlet>
-        <servlet-name>TerremotosGoogleMaps</servlet-name>
-        <jsp-file>/googleMaps.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>TerremotosGoogleMaps</servlet-name>
-        <url-pattern>/terremotos.jsp</url-pattern>
-    </servlet-mapping>
+    <filter>
+        <filter-name>ChangeDataFromFarmaciasToTerremotos</filter-name>
+        <filter-class>com.google.code.unlp.tesis.volatiler.filter.XsltFilter</filter-class>
+        <init-param>
+            <param-name>xslPath</param-name>
+            <param-value>/xml/changeDataFromFarmaciasToTerremotos.xsl</param-value>
+        </init-param>
+        <init-param>
+            <param-name>affinityResolver</param-name>
+            <param-value>com.google.code.laplatafarmacias.volatileEarthquake.affinity.GetFarmaciasOnDutyForTerremotosOgnlAffinityResolver</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>ChangeDataFromFarmaciasToTerremotos</filter-name>
+        <url-pattern>/googleMaps.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ChangeDataFromFarmaciasToTerremotos</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>     
      
      <!-- Defines a filter that changes the link that gets the data for the map from "laplatafarmacias/getPharmaciesOnDuty" 
-        to "laplatafarmacias/getPharmaciesOnDuty?terremotos=true". The filter is only applied for /terremotos.jsp. -->
+        to "laplatafarmacias/getPharmaciesOnDuty?terremotos=true". The filter is only applied for /googleMaps.jsp?terremotos=true. -->
     <filter>
         <filter-name>ChangeGetFarmaciasLink</filter-name>
         <filter-class>com.google.code.unlp.tesis.volatiler.filter.RegexFilter</filter-class>
@@ -100,10 +119,18 @@
             <param-name>replacement</param-name>
             <param-value>laplatafarmacias/getPharmaciesOnDuty?terremotos=true</param-value>
         </init-param>
+        <init-param>
+            <param-name>affinityResolver</param-name>
+            <param-value>com.google.code.laplatafarmacias.volatileEarthquake.affinity.GetFarmaciasOnDutyForTerremotosOgnlAffinityResolver</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>ChangeGetFarmaciasLink</filter-name>
-        <url-pattern>/terremotos.jsp</url-pattern>
+        <url-pattern>/googleMaps.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ChangeGetFarmaciasLink</filter-name>
+        <url-pattern>/</url-pattern>
     </filter-mapping>
      
      <!-- Defines a filter that makes the request.getAttribute("URL_REQUEST_ATTRIBUTE") return always
