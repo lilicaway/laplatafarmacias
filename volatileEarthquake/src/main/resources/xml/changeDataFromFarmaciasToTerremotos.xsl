@@ -44,11 +44,25 @@ In our case we need it to add a div element containing a menu of navigation.
         </xsl:copy>
         <tr>
             <td colspan="2">
-               <a href="/googleMaps.jsp?terremotos=true">Checkout the Terremotos in Ecuador!</a>
+                <a href="/">Back to Farmacias</a>
             </td>
         </tr>
     </xsl:template>
-    
+
     <xsl:template match="xhtml:h3[contains(.,'Under Construction')]">
+    </xsl:template>
+    <xsl:template match="xhtml:h3[contains(.,'This page was adapted from')]">
+    </xsl:template>
+    <xsl:template
+        match="xhtml:h2[contains(.,'Farmacias de Turno en La Plata')]">
+        <xsl:copy>
+            Terremotos
+        </xsl:copy>
+    </xsl:template>
+    <xsl:template
+        match="xhtml:title[contains(.,'Farmacias de Turno en La Plata')]">
+        <xsl:copy>
+            Terremotos
+        </xsl:copy>
     </xsl:template>
 </xsl:stylesheet>
