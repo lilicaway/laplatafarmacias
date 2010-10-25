@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-    <!-- Start of Volatile Configuration -->
+    <!-- ************************** Start of Volatile Configuration ************************** -->
     <listener>
         <listener-class>com.google.code.unlp.tesis.volatiler.servlet.VolatilerRegistryListener</listener-class>
     </listener>
@@ -27,6 +27,7 @@
     </filter-mapping>
 
 
+
     <filter>
         <filter-name>FarmaciasMapEnhancer</filter-name>
         <filter-class>com.google.code.unlp.tesis.volatiler.filter.XsltFilter</filter-class>
@@ -37,6 +38,10 @@
         <init-param>
             <param-name>affinityResolver</param-name>
             <param-value>com.google.code.laplatafarmacias.volatileProject.affinity.EvenMinutesAffinityResolver</param-value>
+        </init-param>
+        <init-param>
+            <param-name>activeByDefault</param-name>
+            <param-value>false</param-value>
         </init-param>
     </filter>
     <filter-mapping>
@@ -49,15 +54,74 @@
         <url-pattern>/</url-pattern>
     </filter-mapping>
      -->
-     <servlet>
+    <servlet>
         <servlet-name>VolatilityActivatorConsole</servlet-name>
         <servlet-class>com.google.code.unlp.tesis.volatiler.servlet.VolatilityActivatorConsoleServlet</servlet-class>
-     </servlet>
-     <servlet-mapping>
+    </servlet>
+    <servlet-mapping>
         <servlet-name>VolatilityActivatorConsole</servlet-name>
         <url-pattern>/admin/volatilityActivatorConsole</url-pattern>
-     </servlet-mapping>
-    <!-- End of Volatile Configuration -->
+    </servlet-mapping>
+
+
+    <filter>
+        <filter-name>AddALinkToTerremotos</filter-name>
+        <filter-class>com.google.code.unlp.tesis.volatiler.filter.XsltFilter</filter-class>
+        <init-param>
+            <param-name>xslPath</param-name>
+            <param-value>/xml/addALinkToTerremotos.xsl</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>AddALinkToTerremotos</filter-name>
+        <url-pattern>/googleMaps.jsp</url-pattern>
+    </filter-mapping>
+     
+     <!-- Defines an alias called /terremotos.jsp for the /googleMaps.jsp -->
+    <servlet>
+        <servlet-name>TerremotosGoogleMaps</servlet-name>
+        <jsp-file>/googleMaps.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TerremotosGoogleMaps</servlet-name>
+        <url-pattern>/terremotos.jsp</url-pattern>
+    </servlet-mapping>
+     
+     <!-- Defines a filter that changes the link that gets the data for the map from "laplatafarmacias/getPharmaciesOnDuty" 
+        to "laplatafarmacias/getPharmaciesOnDuty?terremotos=true". The filter is only applied for /terremotos.jsp. -->
+    <filter>
+        <filter-name>ChangeGetFarmaciasLink</filter-name>
+        <filter-class>com.google.code.unlp.tesis.volatiler.filter.RegexFilter</filter-class>
+        <init-param>
+            <param-name>regex</param-name>
+            <param-value>laplatafarmacias/getPharmaciesOnDuty</param-value>
+        </init-param>
+        <init-param>
+            <param-name>replacement</param-name>
+            <param-value>laplatafarmacias/getPharmaciesOnDuty?terremotos=true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>ChangeGetFarmaciasLink</filter-name>
+        <url-pattern>/terremotos.jsp</url-pattern>
+    </filter-mapping>
+     
+     <!-- Defines a filter that makes the request.getAttribute("URL_REQUEST_ATTRIBUTE") return always
+        the URL for the pipes with the Terremotos. This filter is applied to the servlet GetFarmaciasOnDuty 
+        when the parameter terremotos=true is present. -->
+    <filter>
+        <filter-name>ChangeUrlRequestAttributeFilterForTerremotos</filter-name>
+        <filter-class>com.google.code.laplatafarmacias.volatileEarthquake.filter.ChangeUrlRequestAttributeFilter</filter-class>
+        <init-param>
+            <param-name>affinityResolver</param-name>
+            <param-value>com.google.code.laplatafarmacias.volatileEarthquake.affinity.GetFarmaciasOnDutyForTerremotosOgnlAffinityResolver</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>ChangeUrlRequestAttributeFilterForTerremotos</filter-name>
+        <servlet-name>GetPharmaciesOnDuty</servlet-name>
+    </filter-mapping>
+    <!-- ************************** End of Volatile Configuration ************************** -->
 
     <!-- Servlets -->
     <servlet>

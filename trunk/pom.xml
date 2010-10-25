@@ -13,6 +13,7 @@
 		<!-- this is a relative path to your project -->
         <module>webapp</module>
         <module>volatileProject</module>
+        <module>volatileEarthquake</module>
     </modules>
 
     <properties>
