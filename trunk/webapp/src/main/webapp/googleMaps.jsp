@@ -51,6 +51,7 @@
       // arrays to hold copies of the markers used by the side_bar
       // because the function closure trick doesnt work there
       var gmarkers = [];
+      var bounds = new GLatLngBounds();
 
       // A function to create the marker and set up the event window
       function createMarker(point,name,html) {
@@ -60,6 +61,8 @@
         });
         // save the info we need to use later for the side_bar
         gmarkers.push(marker);
+        map.addOverlay(marker);
+        bounds.extend(marker.getPoint());
         // add a line to the side_bar html
         side_bar_html += '<li><a href="javascript:myclick(' + (gmarkers.length-1) + ')">' + name + '<\/a></li>';
         return marker;
@@ -71,29 +74,12 @@
         GEvent.trigger(gmarkers[i], "click");
       }
 
-
-      // create the map
-      var map = new GMap2(document.getElementById("map"));
-      map.addControl(new GLargeMapControl());
-      map.addControl(new GMapTypeControl());
-      map.setCenter(new GLatLng( -34.9095 , -57.9993 ), 12);
-
-
-      // Read the data from example.xml
-      GDownloadUrl("laplatafarmacias/getPharmaciesOnDuty", function(doc) {
-        var xmlDoc = GXml.parse(doc);
-        var items = xmlDoc.documentElement.getElementsByTagName("item");
-        //alert('elementos'+items.length);  
-        for (var i = 0; i < items.length; i++) {
-          // obtain the attribues of each item
-		  //alert('i: '+i);
-		  //describimelo("items["+i+"]", items[i]);
-		  var latText = "";
+      function getAttributesForItem(elements){
+    	  var latText = "";
 		  var lngText = "";
 		  var title = "";
 		  var description = "";
-		  var elements = items[i].childNodes;
-		  for (var j = 0;j < elements.length; j++ ) {
+    	  for (var j = 0;j < elements.length; j++ ) {
 			  if (elements.item(j).nodeName == "geo:lat") {
 				  latText = elements.item(j).textContent == null ? elements.item(j).text : elements.item(j).textContent;
 			  } else if (elements.item(j).nodeName == "geo:long") {
@@ -109,8 +95,35 @@
           var point = new GLatLng(lat,lng);
           var html = "<strong>"+title+"</strong>" + (description ? description : "");
           var item = createMarker(point,title,html);
-          map.addOverlay(item);
+          return item;
+      }
+
+      // create the map
+      var map = new GMap2(document.getElementById("map"));
+      map.addControl(new GLargeMapControl());
+      map.addControl(new GMapTypeControl());
+      //if it does not have a center, it fails. Setting dummy initial center.
+      map.setCenter(new GLatLng(0,0),0);
+
+
+      // Read the data from example.xml
+      GDownloadUrl("laplatafarmacias/getPharmaciesOnDuty", function(doc) {
+        var xmlDoc = GXml.parse(doc);
+        var items = xmlDoc.documentElement.getElementsByTagName("item");
+        //alert('elementos'+items.length);  
+        for (var i = 0; i < items.length; i++) {
+          // obtain the attribues of each item
+		  var latText = "";
+		  var lngText = "";
+		  var title = "";
+		  var description = "";
+		  var elements = items[i].childNodes;
+		  var item = getAttributesForItem(elements);
+         
         }
+        //Sets the center and add the zoom according to the markers
+        map.setZoom(map.getBoundsZoomLevel(bounds));
+        map.setCenter(bounds.getCenter());
         side_bar_html += "</ul>";
         // put the assembled side_bar_html contents into the side_bar div
         document.getElementById("side_bar").innerHTML = side_bar_html;
