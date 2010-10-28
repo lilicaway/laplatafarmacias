@@ -26,6 +26,7 @@
         <gae.home>${user.home}/.m2/repository/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}</gae.home>
         <datanucleus.version>1.1.5</datanucleus.version>
         <gae.port>8988</gae.port>
+        <gae.disableUpdateCheck>true</gae.disableUpdateCheck>
 
         <gae.debug.port>8001</gae.debug.port>
         <gae.debug.suspend>false</gae.debug.suspend>

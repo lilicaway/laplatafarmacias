@@ -48,12 +48,8 @@
         <filter-name>FarmaciasMapEnhancer</filter-name>
         <url-pattern>/googleMaps.jsp</url-pattern>
     </filter-mapping>
-    <!-- 
-    <filter-mapping>
-        <filter-name>Xslt</filter-name>
-        <url-pattern>/</url-pattern>
-    </filter-mapping>
-     -->
+    <!-- <filter-mapping> <filter-name>Xslt</filter-name> <url-pattern>/</url-pattern> 
+        </filter-mapping> -->
     <servlet>
         <servlet-name>VolatilityActivatorConsole</servlet-name>
         <servlet-class>com.google.code.unlp.tesis.volatiler.servlet.VolatilityActivatorConsoleServlet</servlet-class>
@@ -84,7 +80,7 @@
         <filter-name>AddALinkToTerremotos</filter-name>
         <url-pattern>/</url-pattern>
     </filter-mapping>
-     
+
     <filter>
         <filter-name>ChangeDataFromFarmaciasToTerremotos</filter-name>
         <filter-class>com.google.code.unlp.tesis.volatiler.filter.XsltFilter</filter-class>
@@ -104,13 +100,14 @@
     <filter-mapping>
         <filter-name>ChangeDataFromFarmaciasToTerremotos</filter-name>
         <url-pattern>/</url-pattern>
-    </filter-mapping>     
-     
-     <!-- Defines a filter that changes the link that gets the data for the map from "laplatafarmacias/getPharmaciesOnDuty" 
-        to "laplatafarmacias/getPharmaciesOnDuty?terremotos=true". The filter is only applied for /googleMaps.jsp?terremotos=true. -->
+    </filter-mapping>
+
+    <!-- Defines a filter that changes the link that gets the data for the 
+        map from "laplatafarmacias/getPharmaciesOnDuty" to "laplatafarmacias/getPharmaciesOnDuty?terremotos=true". 
+        The filter is only applied for /googleMaps.jsp?terremotos=true. -->
     <filter>
         <filter-name>ChangeGetFarmaciasLink</filter-name>
-        <filter-class>com.google.code.unlp.tesis.volatiler.filter.RegexFilter</filter-class>
+        <filter-class>com.google.code.unlp.tesis.volatiler.filter.regex.RegexFilter</filter-class>
         <init-param>
             <param-name>regex</param-name>
             <param-value>laplatafarmacias/getPharmaciesOnDuty</param-value>
@@ -132,10 +129,10 @@
         <filter-name>ChangeGetFarmaciasLink</filter-name>
         <url-pattern>/</url-pattern>
     </filter-mapping>
-     
-     <!-- Defines a filter that makes the request.getAttribute("URL_REQUEST_ATTRIBUTE") return always
-        the URL for the pipes with the Terremotos. This filter is applied to the servlet GetFarmaciasOnDuty 
-        when the parameter terremotos=true is present. -->
+
+    <!-- Defines a filter that makes the request.getAttribute("URL_REQUEST_ATTRIBUTE") 
+        return always the URL for the pipes with the Terremotos. This filter is applied 
+        to the servlet GetFarmaciasOnDuty when the parameter terremotos=true is present. -->
     <filter>
         <filter-name>ChangeUrlRequestAttributeFilterForTerremotos</filter-name>
         <filter-class>com.google.code.laplatafarmacias.volatileEarthquake.filter.ChangeUrlRequestAttributeFilter</filter-class>
@@ -148,6 +145,36 @@
         <filter-name>ChangeUrlRequestAttributeFilterForTerremotos</filter-name>
         <servlet-name>GetPharmaciesOnDuty</servlet-name>
     </filter-mapping>
+
+    <!-- Vaccines -->
+    <filter>
+        <filter-name>FarmaciasWithVaccines</filter-name>
+        <filter-class>com.google.code.unlp.tesis.volatiler.filter.XsltFilter</filter-class>
+        <init-param>
+            <param-name>xslPath</param-name>
+            <param-value>/xml/AddVaccinesAvail.xsl</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>FarmaciasWithVaccines</filter-name>
+        <url-pattern>/laplatafarmacias/getPharmaciesOnDuty</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>FarmaciasWithVaccinesJavaScript</filter-name>
+        <filter-class>com.google.code.laplatafarmacias.volatileProject.filter.regex.DetectVaccinesFarmacyOnDuty</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FarmaciasWithVaccinesJavaScript</filter-name>
+        <url-pattern>/googleMaps.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>FarmaciasWithVaccinesJavaScript</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
+
+
     <!-- ************************** End of Volatile Configuration ************************** -->
 
     <!-- Servlets -->
