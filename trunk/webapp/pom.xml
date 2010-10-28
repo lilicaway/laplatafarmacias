@@ -401,6 +401,7 @@
                 <version>0.7.2</version>
                 <configuration>
                     <unpackVersion>${gae.version}</unpackVersion>
+                    <disableUpdateCheck>${gae.disableUpdateCheck}</disableUpdateCheck>
                     <!-- For debug related paramters see http://www.kindleit.net/maven_gae_plugin/maven-gae-plugin/debug-mojo.html -->
                     <debugPort>${gae.debug.port}</debugPort>
                     <debugSuspend>${gae.debug.suspend}</debugSuspend>
