@@ -17,12 +17,12 @@
     </modules>
 
     <properties>
-        <gwt.version>2.0.4</gwt.version>
+        <gwt.version>2.1.1</gwt.version>
         <roo.version>1.1.0.M2</roo.version>
         <spring.version>3.0.3.RELEASE</spring.version>
         <slf4j.version>1.6.1</slf4j.version>
-        <gae.version>1.3.8</gae.version>
-        <gae-test.version>1.3.8</gae-test.version>
+        <gae.version>1.4.0</gae.version>
+        <gae-test.version>1.4.0</gae-test.version>
         <gae.home>${user.home}/.m2/repository/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}</gae.home>
         <datanucleus.version>1.1.5</datanucleus.version>
         <gae.port>8988</gae.port>
